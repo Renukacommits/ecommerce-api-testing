@@ -8,3 +8,6 @@ newman/
 
 # Node (only relevant if/when package.json is added for Newman scripts)
 node_modules/
+
+# Prompts folder held back pending review (05-08-2026) — kept locally, not yet decided for portfolio inclusion
+docs/prompts/
