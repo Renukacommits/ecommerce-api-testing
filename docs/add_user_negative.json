@@ -1,0 +1,23 @@
+[
+  {
+    "id": "N01",
+    "scenario": "Empty body",
+    "payload": {},
+    "expectedStatus": 201,
+    "note": "Confirmed live 15-07-2026 - DummyJSON accepts an empty body. Same permissive-write pattern already documented as DEF-001/002/003 (Update Cart) and DEF-016 (Add Cart)."
+  },
+  {
+    "id": "N02",
+    "scenario": "Missing required fields (firstName, lastName) - only age sent",
+    "payload": { "age": 28 },
+    "expectedStatus": 201,
+    "note": "Confirmed live - no server-side required-field validation."
+  },
+  {
+    "id": "N03",
+    "scenario": "Wrong data type for age (string instead of number)",
+    "payload": { "firstName": "Ava", "lastName": "Stone", "age": "twenty-eight" },
+    "expectedStatus": 201,
+    "note": "Confirmed live - no type validation on age."
+  }
+]

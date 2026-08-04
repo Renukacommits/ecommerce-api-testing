@@ -1,0 +1,23 @@
+[
+  {
+    "id": "H01",
+    "scenario": "Update single field (lastName)",
+    "userId": 2,
+    "payload": { "lastName": "Owais" },
+    "expectedStatus": 200
+  },
+  {
+    "id": "H02",
+    "scenario": "Update multiple fields (lastName, age)",
+    "userId": 2,
+    "payload": { "lastName": "Owais", "age": 31 },
+    "expectedStatus": 200
+  },
+  {
+    "id": "H03",
+    "scenario": "Edge: extra unrecognized field in body",
+    "userId": 2,
+    "payload": { "lastName": "Owais", "favoriteColor": "teal" },
+    "expectedStatus": 200
+  }
+]

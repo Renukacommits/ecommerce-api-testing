@@ -1,0 +1,10 @@
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Newman CLI raw run output (regenerated every run — not portfolio evidence)
+newman/
+
+# Node (only relevant if/when package.json is added for Newman scripts)
+node_modules/

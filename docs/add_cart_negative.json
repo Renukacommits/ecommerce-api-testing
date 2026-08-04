@@ -1,0 +1,170 @@
+[
+  {
+    "id": "N01",
+    "scenario": "userId = 0",
+    "type": "Negative",
+    "userId": 0,
+    "products": [{"id": 144, "quantity": 1}],
+    "expectedStatus": 400
+  },
+  {
+    "id": "N02",
+    "scenario": "userId = -1 (negative number)",
+    "type": "Negative - Bug: returns 404 instead of 400",
+    "userId": -1,
+    "products": [{"id": 144, "quantity": 1}],
+    "expectedStatus": 404
+  },
+  {
+    "id": "N03",
+    "scenario": "userId = 9999 (non-existent)",
+    "type": "Negative",
+    "userId": 9999,
+    "products": [{"id": 144, "quantity": 1}],
+    "expectedStatus": 404
+  },
+  {
+    "id": "N04",
+    "scenario": "userId = 99999999 (very large, non-existent)",
+    "type": "Negative",
+    "userId": 99999999,
+    "products": [{"id": 144, "quantity": 1}],
+    "expectedStatus": 404
+  },
+  {
+    "id": "N05",
+    "scenario": "userId = 1.5 (float)",
+    "type": "Negative - Bug: returns 404 instead of 400",
+    "userId": 1.5,
+    "products": [{"id": 144, "quantity": 1}],
+    "expectedStatus": 404
+  },
+  {
+    "id": "N06",
+    "scenario": "userId = string (abc)",
+    "type": "Negative",
+    "userId": "abc",
+    "products": [{"id": 144, "quantity": 1}],
+    "expectedStatus": 400
+  },
+  {
+    "id": "N07",
+    "scenario": "userId = null",
+    "type": "Negative",
+    "userId": null,
+    "products": [{"id": 144, "quantity": 1}],
+    "expectedStatus": 400
+  },
+  {
+    "id": "N08",
+    "scenario": "productId = 0 - Bug: accepted silently",
+    "type": "Negative - Bug: returns 201 instead of 400",
+    "userId": 1,
+    "products": [{"id": 0, "quantity": 1}],
+    "expectedStatus": 201
+  },
+  {
+    "id": "N09",
+    "scenario": "productId = 9999 (non-existent) - Bug: accepted silently",
+    "type": "Negative - Bug: returns 201 instead of 400",
+    "userId": 1,
+    "products": [{"id": 9999, "quantity": 1}],
+    "expectedStatus": 201
+  },
+  {
+    "id": "N10",
+    "scenario": "productId = string (abc) - Bug: accepted silently",
+    "type": "Negative - Bug: returns 201 instead of 400",
+    "userId": 1,
+    "products": [{"id": "abc", "quantity": 1}],
+    "expectedStatus": 201
+  },
+  {
+    "id": "N11",
+    "scenario": "productId = null - Bug: accepted silently",
+    "type": "Negative - Bug: returns 201 instead of 400",
+    "userId": 1,
+    "products": [{"id": null, "quantity": 1}],
+    "expectedStatus": 201
+  },
+  {
+    "id": "N12",
+    "scenario": "quantity = 0 - Bug: accepted silently",
+    "type": "Negative - Bug: returns 201 instead of 400",
+    "userId": 1,
+    "products": [{"id": 144, "quantity": 0}],
+    "expectedStatus": 201
+  },
+  {
+    "id": "N13",
+    "scenario": "quantity = -1 (negative) - Bug: accepted silently",
+    "type": "Negative - Bug: returns 201 instead of 400",
+    "userId": 1,
+    "products": [{"id": 144, "quantity": -1}],
+    "expectedStatus": 201
+  },
+  {
+    "id": "N14",
+    "scenario": "quantity = string (four) - Bug: accepted silently",
+    "type": "Negative - Bug: returns 201 instead of 400",
+    "userId": 1,
+    "products": [{"id": 144, "quantity": "four"}],
+    "expectedStatus": 201
+  },
+  {
+    "id": "N15",
+    "scenario": "quantity = decimal (1.5) - Bug: accepted silently",
+    "type": "Negative - Bug: returns 201 instead of 400",
+    "userId": 1,
+    "products": [{"id": 144, "quantity": 1.5}],
+    "expectedStatus": 201
+  },
+  {
+    "id": "N16",
+    "scenario": "quantity = null - Bug: accepted silently",
+    "type": "Negative - Bug: returns 201 instead of 400",
+    "userId": 1,
+    "products": [{"id": 144, "quantity": null}],
+    "expectedStatus": 201
+  },
+  {
+    "id": "N17",
+    "scenario": "Missing quantity field in product - Bug: accepted silently",
+    "type": "Negative - Bug: returns 201 instead of 400",
+    "userId": 1,
+    "products": [{"id": 144}],
+    "expectedStatus": 201
+  },
+  {
+    "id": "N18",
+    "scenario": "Missing productId field in product - Bug: accepted silently",
+    "type": "Negative - Bug: returns 201 instead of 400",
+    "userId": 1,
+    "products": [{"quantity": 4}],
+    "expectedStatus": 201
+  },
+  {
+    "id": "N19",
+    "scenario": "Empty products array",
+    "type": "Negative",
+    "userId": 1,
+    "products": [],
+    "expectedStatus": 400
+  },
+  {
+    "id": "N20",
+    "scenario": "Missing products (null)",
+    "type": "Negative",
+    "userId": 1,
+    "products": null,
+    "expectedStatus": 400
+  },
+  {
+    "id": "N21",
+    "scenario": "Missing userId (null)",
+    "type": "Negative",
+    "userId": null,
+    "products": [{"id": 144, "quantity": 1}],
+    "expectedStatus": 400
+  }
+]

@@ -1,0 +1,45 @@
+[
+  {
+    "id": "H01",
+    "scenario": "Minimal required fields only",
+    "payload": { "firstName": "Ava", "lastName": "Stone", "age": 28 },
+    "expectedStatus": 201
+  },
+  {
+    "id": "H02",
+    "scenario": "Full profile fields",
+    "payload": {
+      "firstName": "Ava",
+      "lastName": "Stone",
+      "age": 28,
+      "email": "ava.stone@example.com",
+      "gender": "female",
+      "username": "avastone28"
+    },
+    "expectedStatus": 201
+  },
+  {
+    "id": "H03",
+    "scenario": "Boundary: low plausible age (1)",
+    "payload": { "firstName": "Leo", "lastName": "Byrne", "age": 1 },
+    "expectedStatus": 201
+  },
+  {
+    "id": "H04",
+    "scenario": "Boundary: high plausible age (120)",
+    "payload": { "firstName": "Nora", "lastName": "Quill", "age": 120 },
+    "expectedStatus": 201
+  },
+  {
+    "id": "H05",
+    "scenario": "Edge: unicode characters in name fields",
+    "payload": { "firstName": "José", "lastName": "Núñez", "age": 34 },
+    "expectedStatus": 201
+  },
+  {
+    "id": "H06",
+    "scenario": "Edge: extra unrecognized field in body",
+    "payload": { "firstName": "Priya", "lastName": "Rao", "age": 26, "favoriteColor": "teal" },
+    "expectedStatus": 201
+  }
+]

@@ -1,0 +1,118 @@
+[
+  {
+    "id": "H01",
+    "scenario": "Valid userId, single product, valid quantity",
+    "userId": 1,
+    "products": [{"id": 144, "quantity": 1}],
+    "expectedStatus": 201
+  },
+  {
+    "id": "H02",
+    "scenario": "Valid userId, multiple products (5), valid quantities",
+    "userId": 2,
+    "products": [
+      {"id": 144, "quantity": 2},
+      {"id": 98, "quantity": 1},
+      {"id": 50, "quantity": 3},
+      {"id": 20, "quantity": 1},
+      {"id": 35, "quantity": 2}
+    ],
+    "expectedStatus": 201
+  },
+  {
+    "id": "H03",
+    "scenario": "Valid userId, multiple products from different categories",
+    "userId": 3,
+    "products": [
+      {"id": 1, "quantity": 1},
+      {"id": 79, "quantity": 1},
+      {"id": 138, "quantity": 2},
+      {"id": 192, "quantity": 1}
+    ],
+    "expectedStatus": 201
+  },
+  {
+    "id": "H04",
+    "scenario": "Boundary: quantity = 1 (minimum)",
+    "userId": 4,
+    "products": [{"id": 144, "quantity": 1}],
+    "expectedStatus": 201
+  },
+  {
+    "id": "H05",
+    "scenario": "Boundary: quantity = 20 (assumed maximum)",
+    "userId": 5,
+    "products": [{"id": 144, "quantity": 20}],
+    "expectedStatus": 201
+  },
+  {
+    "id": "H06",
+    "scenario": "Boundary: same product added twice",
+    "userId": 6,
+    "products": [
+      {"id": 144, "quantity": 2},
+      {"id": 144, "quantity": 3}
+    ],
+    "expectedStatus": 201
+  },
+  {
+    "id": "H07",
+    "scenario": "Boundary: userId 208 (last valid user)",
+    "userId": 208,
+    "products": [{"id": 98, "quantity": 1}],
+    "expectedStatus": 201
+  },
+  {
+    "id": "H08",
+    "scenario": "Boundary: very large quantity (9999999) - no max enforced",
+    "userId": 1,
+    "products": [{"id": 144, "quantity": 9999999}],
+    "expectedStatus": 201
+  },
+  {
+    "id": "H09",
+    "scenario": "Boundary: maximum number of products (10) in one cart",
+    "userId": 2,
+    "products": [
+      {"id": 1, "quantity": 1},
+      {"id": 2, "quantity": 1},
+      {"id": 3, "quantity": 1},
+      {"id": 4, "quantity": 1},
+      {"id": 5, "quantity": 1},
+      {"id": 6, "quantity": 1},
+      {"id": 7, "quantity": 1},
+      {"id": 8, "quantity": 1},
+      {"id": 9, "quantity": 1},
+      {"id": 10, "quantity": 1}
+    ],
+    "expectedStatus": 201
+  },
+  {
+    "id": "H10",
+    "scenario": "Edge: all products from same category",
+    "userId": 3,
+    "products": [
+      {"id": 121, "quantity": 1},
+      {"id": 122, "quantity": 1},
+      {"id": 123, "quantity": 1}
+    ],
+    "expectedStatus": 201
+  },
+  {
+    "id": "H11",
+    "scenario": "Edge: extra unknown fields in body - API should ignore",
+    "userId": 1,
+    "products": [{"id": 144, "quantity": 4}],
+    "expectedStatus": 201
+  },
+  {
+    "id": "H12",
+    "scenario": "Edge: 1 valid + 1 invalid productId - API silently drops invalid",
+    "userId": 1,
+    "products": [
+      {"id": 144, "quantity": 4},
+      {"id": 989999999999999999, "quantity": 9}
+    ],
+    "expectedStatus": 201
+  }
+]

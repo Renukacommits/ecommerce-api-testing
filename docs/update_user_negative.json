@@ -1,0 +1,29 @@
+[
+  {
+    "id": "N01",
+    "scenario": "Non-existent user ID (9999)",
+    "userId": 9999,
+    "payload": { "lastName": "Owais" },
+    "expectedStatus": 404,
+    "isKnownDefect": false,
+    "note": "Confirmed live 15-07-2026 - correctly returns 404. Unlike Add User, this endpoint DOES validate that the target user exists."
+  },
+  {
+    "id": "N02",
+    "scenario": "Empty body",
+    "userId": 2,
+    "payload": {},
+    "expectedStatus": 200,
+    "isKnownDefect": true,
+    "note": "Confirmed live - accepted with no validation error. Same permissive-write pattern as DEF-001/002/003/019."
+  },
+  {
+    "id": "N03",
+    "scenario": "Invalid data type for age (string instead of number)",
+    "userId": 2,
+    "payload": { "age": "not-a-number" },
+    "expectedStatus": 200,
+    "isKnownDefect": true,
+    "note": "Confirmed live - no type validation on age."
+  }
+]
