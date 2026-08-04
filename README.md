@@ -24,18 +24,17 @@ Full CRUD coverage across Auth, Products, Carts and Users; data-driven testing u
 
 Counts below are pulled directly from the live Postman collection, not estimated.
 
-| Module       | Requests | Assertion Status                                                              |
-| ------------ | -------- | ------------------------------------------------------------------------------ |
-| **Auth**     | 17       | ✅ Complete                                                                     |
-| **Products** | 23       | ✅ Complete                                                                     |
-| **Carts**    | 63       | ✅ Complete                                                                     |
-| **Users**    | 62       | ✅ Complete                                                                     |
-| **Total**    | **165**  | **165/165 requests have completed assertions — collection is 100% assertion-complete** |
+| Folder            | Requests | Purpose                                                                        |
+| ----------------- | -------- | ------------------------------------------------------------------------------- |
+| **Auth**          | 17       | ✅ CRUD + assertions complete                                                    |
+| **Products**      | 23       | ✅ CRUD + assertions complete                                                    |
+| **Carts**         | 63       | ✅ CRUD + assertions complete                                                    |
+| **Users**         | 62       | ✅ CRUD + assertions complete                                                    |
+| **00 - Setup**    | 3        | Captures dataset totals into environment variables before any module runs      |
+| **E2E Scenarios** | 4        | Chained cross-module business flow (login → browse → cart, dynamic end-to-end) |
+| **Total**         | **172**  | **165/165 CRUD requests have completed assertions — 100% assertion-complete**   |
 
-**Also in the collection (not counted above — infrastructure and integration, not per-module CRUD):**
-
-- **`00 - Setup`** (3 requests) — captures dataset totals (`expectedProductTotal`, `expectedCartTotal`, `expectedUserTotal`) into environment variables before any module runs, so boundary/total-count assertions read a live-captured value instead of a hardcoded magic number.
-- **`E2E Scenarios`** (4 requests) — a single chained business flow: log in and capture the token → fetch the logged-in user's profile → search products by category and capture a product ID → add that exact product to that exact user's cart, with assertions confirming the final cart genuinely belongs to that user and contains that product. Every step captures what the next one needs dynamically — no hardcoded IDs anywhere in the chain. Demonstrates the system holds together across modules, not just at each endpoint tested in isolation.
+The `00 - Setup` folder captures `expectedProductTotal`, `expectedCartTotal`, and `expectedUserTotal` into environment variables so downstream boundary/total-count assertions read a live-captured value instead of a hardcoded magic number. `E2E Scenarios` is a single chained flow — log in and capture the token → fetch the logged-in user's profile → search products by category and capture a product ID → add that exact product to that exact user's cart, with assertions confirming the final cart genuinely belongs to that user and contains that product. Every step captures what the next one needs dynamically; no hardcoded IDs anywhere in the chain. Demonstrates the system holds together across modules, not just at each endpoint tested in isolation.
 
 ### Defects Found
 
