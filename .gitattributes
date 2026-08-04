@@ -1,0 +1,7 @@
+# Normalize line endings for all text files, regardless of OS
+* text=auto eol=lf
+
+# Reports and collections are large generated/exported files — diff noise doesn't matter, but keep them as LF too
+*.html text eol=lf
+*.json text eol=lf
+*.md text eol=lf
