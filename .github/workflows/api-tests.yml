@@ -1,0 +1,60 @@
+name: API Test Suite
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 0'
+
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Newman
+        run: npm install -g newman newman-reporter-htmlextra
+
+      - name: Run API test suite
+        run: |
+          newman run "postman/collections/Project 2 - E-commerce API- DummyJSON.postman_collection.json" \
+            -e "postman/environments/DummyJSON.postman_environment.json" \
+            -r cli,htmlextra \
+            --reporter-htmlextra-export reports/ci-run-report.html
+
+  known-defect-recheck:
+    needs: regression
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Newman
+        run: npm install -g newman newman-reporter-htmlextra
+
+      - name: Recheck volume-sensitive auth defects in isolation
+        run: |
+          newman run "postman/collections/Project 2 - E-commerce API- DummyJSON.postman_collection.json" \
+            -e "postman/environments/DummyJSON.postman_environment.json" \
+            --folder "Get current auth user" \
+            --folder "Add a cart" \
+            --folder "Get Single User" \
+            --folder "Search Users" \
+            --folder "Filter Users" \
+            --folder "Get User Carts" \
+            --folder "Add User" \
+            --folder "Delete User" \
+            -r cli,htmlextra \
+            --reporter-htmlextra-export reports/ci-known-defect-report.html
