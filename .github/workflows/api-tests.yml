@@ -23,9 +23,12 @@ jobs:
         run: npm install -g newman newman-reporter-htmlextra
 
       - name: Run API test suite
+        env:
+          AUTH_PASSWORD: ${{ secrets.AUTH_PASSWORD }}
         run: |
           newman run "postman/collections/Project 2 - E-commerce API- DummyJSON.postman_collection.json" \
             -e "postman/environments/DummyJSON.postman_environment.json" \
+            --env-var "auth_password_0pef=$AUTH_PASSWORD" \
             -r cli,htmlextra \
             --reporter-htmlextra-export reports/ci-run-report.html
 
@@ -45,9 +48,12 @@ jobs:
         run: npm install -g newman newman-reporter-htmlextra
 
       - name: Recheck volume-sensitive auth defects in isolation
+        env:
+          AUTH_PASSWORD: ${{ secrets.AUTH_PASSWORD }}
         run: |
           newman run "postman/collections/Project 2 - E-commerce API- DummyJSON.postman_collection.json" \
             -e "postman/environments/DummyJSON.postman_environment.json" \
+            --env-var "auth_password_0pef=$AUTH_PASSWORD" \
             --folder "Get current auth user" \
             --folder "Add a cart" \
             --folder "Get Single User" \
