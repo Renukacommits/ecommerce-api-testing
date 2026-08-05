@@ -20,7 +20,7 @@ jobs:
           node-version: '20'
 
       - name: Install Newman
-        run: npm install -g newman newman-reporter-htmlextra
+        run: npm install -g newman@6.2.2 newman-reporter-htmlextra
 
       # 156 requests: everything except the 6 data-driven requests (run separately below,
       # each with its own fixture file) and the 9 volume-sensitive KNOWN DEFECT DEF-005/018/021
@@ -169,7 +169,7 @@ jobs:
           node-version: '20'
 
       - name: Install Newman
-        run: npm install -g newman newman-reporter-htmlextra
+        run: npm install -g newman@6.2.2 newman-reporter-htmlextra
 
       - name: Recheck volume-sensitive auth defects in isolation
         env:
