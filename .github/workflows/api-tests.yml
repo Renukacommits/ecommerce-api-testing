@@ -22,14 +22,17 @@ jobs:
       - name: Install Newman
         run: npm install -g newman@6.2.2 newman-reporter-htmlextra
 
-      # 156 requests: everything except the 6 data-driven requests (run separately below,
-      # each with its own fixture file) and the 9 volume-sensitive KNOWN DEFECT DEF-005/018/021
-      # requests (run exclusively in the known-defect-recheck job, since they're documented to
-      # flip behavior under full-collection request volume). One request ("Get current auth
-      # user", the plain valid-token case) is a documented gap: it shares its exact name with
-      # its own parent folder, so no --folder string can select it without also re-including
-      # its "No Auth Token" sibling.
-      - name: Run core regression (156 requests)
+      # 151 requests: everything except (a) the 6 data-driven requests (run separately below,
+      # each with its own fixture file), (b) the 9 originally-documented volume-sensitive
+      # KNOWN DEFECT DEF-005/018/021 requests, and (c) 4 additional requests confirmed
+      # volume-sensitive across 2 consecutive CI runs (Get current auth user - Invalid Token,
+      # Refresh auth session - Missing refreshToken, Add a cart - Invalid Token,
+      # Update Cart - No Token) -- all 13 run exclusively in known-defect-recheck.
+      # Two further requests are documented gaps, not exclusions: "Get current auth user" and
+      # "Refresh auth session" (the plain/self cases) each share their exact name with their
+      # own parent folder, and that folder now has excluded children -- no --folder string can
+      # select the plain case alone without also re-including an excluded sibling.
+      - name: Run core regression (151 requests)
         env:
           AUTH_PASSWORD: ${{ secrets.AUTH_PASSWORD }}
         run: |
@@ -38,15 +41,19 @@ jobs:
             --env-var "auth_password_0pef=$AUTH_PASSWORD" \
             --folder "00 - Setup" \
             --folder "Login user and get tokens" \
-            --folder "Get current auth user - Invalid Token" \
-            --folder "Refresh auth session" \
+            --folder "Wrong method" \
+            --folder "Invalid refreshToken" \
+            --folder "Invalid expiresInMins" \
             --folder "Products" \
             --folder "Get All Carts" \
             --folder "Get Single Cart" \
             --folder "Get Carts by User" \
-            --folder "Add a cart - Invalid Token" \
             --folder "Add a cart - Valid Token" \
-            --folder "Update Cart" \
+            --folder "Update Cart - Invalid Token" \
+            --folder "Update Cart - Valid Token" \
+            --folder "merge - true/" \
+            --folder "merge - false/" \
+            --folder "Negative/" \
             --folder "Delete Cart" \
             --folder "Get All Users" \
             --folder "Get Single User - Valid (Lower Boundary id=1)" \
@@ -179,7 +186,10 @@ jobs:
             -e "postman/environments/DummyJSON.postman_environment.json" \
             --env-var "auth_password_0pef=$AUTH_PASSWORD" \
             --folder "Get current auth user" \
+            --folder "Refresh auth session" \
             --folder "Add a cart - No Token" \
+            --folder "Add a cart - Invalid Token" \
+            --folder "Update Cart - No Token" \
             --folder "Get Single User" \
             --folder "Search Users" \
             --folder "Filter Users" \

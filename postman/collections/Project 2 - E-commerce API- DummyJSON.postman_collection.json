@@ -2297,9 +2297,9 @@
                       "    pm.response.to.have.status(400);",
                       "});",
                       "",
-                      "const responseBody = pm.response.json();",
+                      "const sortErrorBody = pm.response.json();",
                       "pm.test(\"Response body contains the correct message\", () => {",
-                      "    pm.expect(responseBody.message.toLowerCase()).to.include(\"'asc' or 'desc'\");",
+                      "    pm.expect(sortErrorBody.message.toLowerCase()).to.include(\"'asc' or 'desc'\");",
                       "});"
                     ],
                     "type": "text/javascript"
