@@ -22,7 +22,14 @@ jobs:
       - name: Install Newman
         run: npm install -g newman newman-reporter-htmlextra
 
-      - name: Run core regression (166 requests — everything except the 6 data-driven requests below)
+      # 156 requests: everything except the 6 data-driven requests (run separately below,
+      # each with its own fixture file) and the 9 volume-sensitive KNOWN DEFECT DEF-005/018/021
+      # requests (run exclusively in the known-defect-recheck job, since they're documented to
+      # flip behavior under full-collection request volume). One request ("Get current auth
+      # user", the plain valid-token case) is a documented gap: it shares its exact name with
+      # its own parent folder, so no --folder string can select it without also re-including
+      # its "No Auth Token" sibling.
+      - name: Run core regression (156 requests)
         env:
           AUTH_PASSWORD: ${{ secrets.AUTH_PASSWORD }}
         run: |
@@ -31,29 +38,54 @@ jobs:
             --env-var "auth_password_0pef=$AUTH_PASSWORD" \
             --folder "00 - Setup" \
             --folder "Login user and get tokens" \
-            --folder "Get current auth user" \
+            --folder "Get current auth user - Invalid Token" \
             --folder "Refresh auth session" \
             --folder "Products" \
             --folder "Get All Carts" \
             --folder "Get Single Cart" \
             --folder "Get Carts by User" \
-            --folder "Add a cart - No Token" \
             --folder "Add a cart - Invalid Token" \
             --folder "Add a cart - Valid Token" \
             --folder "Update Cart" \
             --folder "Delete Cart" \
             --folder "Get All Users" \
-            --folder "Get Single User" \
-            --folder "Search Users" \
-            --folder "Filter Users" \
-            --folder "Get User Carts" \
-            --folder "Add User - No Auth Token" \
+            --folder "Get Single User - Valid (Lower Boundary id=1)" \
+            --folder "Get Single User - Valid (Upper Boundary id=208)" \
+            --folder "Get Single User - Invalid Token" \
+            --folder "Get Single User - Valid Token" \
+            --folder "Negative - Invalid ID (0)" \
+            --folder "Negative - Invalid ID (-1)" \
+            --folder "Negative - Invalid ID (non-existent 9999)" \
+            --folder "Negative - Invalid ID (non-numeric abc)" \
+            --folder "Negative - Invalid ID (decimal 1.5)" \
+            --folder "Search Users - Valid Query" \
+            --folder "Search Users - No Match" \
+            --folder "Search Users - Empty Query - Edge" \
+            --folder "Search Users - Invalid Token" \
+            --folder "Search Users - Valid Token" \
+            --folder "Filter Users - Valid Key and Value" \
+            --folder "Filter Users - Invalid Token" \
+            --folder "Filter Users - Valid Token" \
+            --folder "Negative - Invalid Key" \
+            --folder "Negative - Missing Value" \
+            --folder "Negative - Missing Key" \
+            --folder "Get User Carts - Valid User With Carts" \
+            --folder "Get User Carts - User ID Beyond Valid Range - Boundary" \
+            --folder "Get User Carts - Invalid Token" \
+            --folder "Get User Carts - Valid Token" \
+            --folder "Negative - Invalid User ID" \
             --folder "Add User - Invalid Token" \
             --folder "Add User - Valid Token" \
             --folder "Update User - No Auth Token" \
             --folder "Update User - Invalid Token" \
             --folder "Update User - Valid Token" \
-            --folder "Delete User" \
+            --folder "Delete User - Valid ID" \
+            --folder "Delete User - No Auth Token" \
+            --folder "Delete User - Invalid Token" \
+            --folder "Delete User - Valid Token" \
+            --folder "Negative - Invalid ID" \
+            --folder "Delete Same User Twice (Idempotency)" \
+            --folder "GET after DELETE" \
             --folder "E2E Scenarios" \
             -r cli,htmlextra \
             --reporter-htmlextra-export reports/ci-run-report.html
