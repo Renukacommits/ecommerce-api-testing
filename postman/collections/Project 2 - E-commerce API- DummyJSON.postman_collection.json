@@ -5358,7 +5358,7 @@
                           "// Pre-request script",
                           "pm.sendRequest(`${pm.environment.get('baseURL')}/carts/208`, (err, response) => {",
                           "    const cart = response.json();",
-                          "    pm.variables.set('userId', cart.userId);",
+                          "    pm.variables.set('cartOwnerUserId', cart.userId);",
                           "    pm.variables.set('originalProductCount', cart.totalProducts);",
                           "    pm.variables.set('originalTotalQuantity', cart.totalQuantity);",
                           "});"
@@ -6260,7 +6260,7 @@
                               "// Pre-request script",
                               "pm.sendRequest(`${pm.environment.get('baseURL')}/carts/1`, (err, response) => {",
                               "    const cart = response.json();",
-                              "    pm.variables.set('userId', cart.userId);",
+                              "    pm.variables.set('cartOwnerUserId', cart.userId);",
                               "    pm.variables.set('originalProductCount', cart.totalProducts);",
                               "    pm.variables.set('originalTotalQuantity', cart.totalQuantity);",
                               "});"
@@ -6358,7 +6358,7 @@
                               "// Pre-request script",
                               "pm.sendRequest(`${pm.environment.get('baseURL')}/carts/3`, (err, response) => {",
                               "    const cart = response.json();",
-                              "    pm.variables.set('userId', cart.userId);",
+                              "    pm.variables.set('cartOwnerUserId', cart.userId);",
                               "    pm.variables.set('originalProductCount', cart.totalProducts);",
                               "    pm.variables.set('originalTotalQuantity', cart.totalQuantity);",
                               "});"
@@ -6529,7 +6529,7 @@
                               "});",
                               "",
                               "pm.test('User Id is correct', () =>{",
-                              "    pm.expect(jsonData.userId).to.equal(parseInt(pm.variables.get('userId')));",
+                              "    pm.expect(jsonData.userId).to.equal(parseInt(pm.variables.get('cartOwnerUserId')));",
                               "});",
                               "",
                               "// No body sent — DummyJSON replaces cart with empty cart. Expected values are 0 by design.",
@@ -6557,7 +6557,7 @@
                               "    const cart = response.json();",
                               "    pm.variables.set('originalProductCount', cart.totalProducts);",
                               "    pm.variables.set('originalTotalQuantity', cart.totalQuantity);",
-                              "    pm.variables.set('userId', cart.userId);",
+                              "    pm.variables.set('cartOwnerUserId', cart.userId);",
                               "});"
                             ],
                             "type": "text/javascript"
@@ -6645,7 +6645,7 @@
                               "});",
                               "",
                               "pm.test('User Id is correct', () =>{",
-                              "    pm.expect(jsonData.userId).to.equal(parseInt(pm.variables.get('userId')));",
+                              "    pm.expect(jsonData.userId).to.equal(parseInt(pm.variables.get('cartOwnerUserId')));",
                               "});",
                               "",
                               "// No body sent — DummyJSON replaces cart with empty cart. Expected values are 0 by design.",
@@ -6673,7 +6673,7 @@
                               "    const cart = response.json();",
                               "    pm.variables.set('originalProductCount', cart.totalProducts);",
                               "    pm.variables.set('originalTotalQuantity', cart.totalQuantity);",
-                              "    pm.variables.set('userId', cart.userId);",
+                              "    pm.variables.set('cartOwnerUserId', cart.userId);",
                               "});"
                             ]
                           }
@@ -6734,7 +6734,7 @@
                               "const originalQuantity = parseInt(pm.variables.get('originalTotalQuantity')); // getting the original total quantity in the cart using collection variables",
                               "const originalTotal = parseFloat(pm.variables.get('originalTotal')); // getting the original total amount in the cart using collection variables",
                               "const originalDiscountedTotal = parseFloat(pm.variables.get('originalDiscountedTotal')); // getting the original total amount in the cart using collection variables",
-                              "const userId = parseInt(pm.variables.get('userId'));",
+                              "const userId = parseInt(pm.variables.get('cartOwnerUserId'));",
                               "",
                               "pm.test('Status is 200', () => {",
                               "    pm.response.to.have.status(200);",
@@ -6800,7 +6800,7 @@
                               "    pm.variables.set('originalTotalQuantity', cart.totalQuantity);",
                               "    pm.variables.set('originalTotal', cart.total);",
                               "    pm.variables.set('originalDiscountedTotal', cart.discountedTotal);",
-                              "    pm.variables.set('userId', cart.userId);",
+                              "    pm.variables.set('cartOwnerUserId', cart.userId);",
                               "});"
                             ],
                             "type": "text/javascript"
@@ -6863,7 +6863,7 @@
                               "const originalQuantity = parseInt(pm.variables.get('originalTotalQuantity')); // getting the original total quantity in the cart using collection variables",
                               "const originalTotal = parseFloat(pm.variables.get('originalTotal')); // getting the original total amount in the cart using collection variables",
                               "const originalDiscountedTotal = parseFloat(pm.variables.get('originalDiscountedTotal')); // getting the original total amount in the cart using collection variables",
-                              "const userId = parseInt(pm.variables.get('userId'));",
+                              "const userId = parseInt(pm.variables.get('cartOwnerUserId'));",
                               "",
                               "pm.test('Status is 200', () => {",
                               "    pm.response.to.have.status(200);",
@@ -6929,7 +6929,7 @@
                               "    pm.variables.set('originalTotalQuantity', cart.totalQuantity);",
                               "    pm.variables.set('originalTotal', cart.total);",
                               "    pm.variables.set('originalDiscountedTotal', cart.discountedTotal);",
-                              "    pm.variables.set('userId', cart.userId);",
+                              "    pm.variables.set('cartOwnerUserId', cart.userId);",
                               "});"
                             ]
                           }
@@ -6989,7 +6989,7 @@
                               "const originalQuantity = parseInt(pm.variables.get('originalTotalQuantity')); // getting the original total quantity in the cart using collection variables",
                               "const originalTotal = parseFloat(pm.variables.get('originalTotal')); // getting the original total amount in the cart using collection variables",
                               "const originalDiscountedTotal = parseFloat(pm.variables.get('originalDiscountedTotal')); // getting the original total amount in the cart using collection variables",
-                              "const userId = parseInt(pm.variables.get('userId'));",
+                              "const userId = parseInt(pm.variables.get('cartOwnerUserId'));",
                               "const sentProductId = requestBody.products[0].id;",
                               "",
                               "pm.test('Status is 200', () => {",
@@ -7059,7 +7059,7 @@
                               "    pm.variables.set('originalTotalQuantity', cart.totalQuantity);",
                               "    pm.variables.set('originalTotal', cart.total);",
                               "    pm.variables.set('originalDiscountedTotal', cart.discountedTotal);",
-                              "    pm.variables.set('userId', cart.userId);",
+                              "    pm.variables.set('cartOwnerUserId', cart.userId);",
                               "});"
                             ],
                             "type": "text/javascript"
@@ -7123,7 +7123,7 @@
                               "const originalQuantity = parseInt(pm.variables.get('originalTotalQuantity')); // getting the original total quantity in the cart using collection variables",
                               "const originalTotal = parseFloat(pm.variables.get('originalTotal')); // getting the original total amount in the cart using collection variables",
                               "const originalDiscountedTotal = parseFloat(pm.variables.get('originalDiscountedTotal')); // getting the original total amount in the cart using collection variables",
-                              "const userId = parseInt(pm.variables.get('userId'));",
+                              "const userId = parseInt(pm.variables.get('cartOwnerUserId'));",
                               "const sentProductId = requestBody.products[0].id; // getting the product id from the request body",
                               "const sentQuantity = requestBody.products[0].quantity ; //getting the quantity of the product sent in the request body",
                               "const sentCount = requestBody.products.length; // getting the count of products sent in the request",
@@ -7182,7 +7182,7 @@
                               "    pm.variables.set('originalTotalQuantity', cart.totalQuantity);",
                               "    pm.variables.set('originalTotal', cart.total);",
                               "    pm.variables.set('originalDiscountedTotal', cart.discountedTotal);",
-                              "    pm.variables.set('userId', cart.userId);",
+                              "    pm.variables.set('cartOwnerUserId', cart.userId);",
                               "});"
                             ],
                             "type": "text/javascript"
@@ -7244,7 +7244,7 @@
                               "const originalQuantity = parseInt(pm.variables.get('originalTotalQuantity')); // getting the original total quantity in the cart using collection variables",
                               "const originalTotal = parseFloat(pm.variables.get('originalTotal')); // getting the original total amount in the cart using collection variables",
                               "const originalDiscountedTotal = parseFloat(pm.variables.get('originalDiscountedTotal')); // getting the original total amount in the cart using collection variables",
-                              "const userId = parseInt(pm.variables.get('userId'));",
+                              "const userId = parseInt(pm.variables.get('cartOwnerUserId'));",
                               "const sentProductId = requestBody.products[0].id; // getting the product id from the request body",
                               "const sentQuantity = requestBody.products[0].quantity ; //getting the quantity of the product sent in the request body",
                               "const sentCount = requestBody.products.length; // getting the count of products sent in the request",
@@ -7285,7 +7285,7 @@
                               "    pm.variables.set('originalTotalQuantity', cart.totalQuantity);",
                               "    pm.variables.set('originalTotal', cart.total);",
                               "    pm.variables.set('originalDiscountedTotal', cart.discountedTotal);",
-                              "    pm.variables.set('userId', cart.userId);",
+                              "    pm.variables.set('cartOwnerUserId', cart.userId);",
                               "});"
                             ],
                             "type": "text/javascript"
@@ -7347,7 +7347,7 @@
                               "const originalQuantity = parseInt(pm.variables.get('originalTotalQuantity')); // getting the original total quantity in the cart using collection variables",
                               "const originalTotal = parseFloat(pm.variables.get('originalTotal')); // getting the original total amount in the cart using collection variables",
                               "const originalDiscountedTotal = parseFloat(pm.variables.get('originalDiscountedTotal')); // getting the original total amount in the cart using collection variables",
-                              "const userId = parseInt(pm.variables.get('userId'));",
+                              "const userId = parseInt(pm.variables.get('cartOwnerUserId'));",
                               "",
                               "pm.test('Status is 200', () => {",
                               "    pm.response.to.have.status(200);",
@@ -7421,7 +7421,7 @@
                               "    pm.variables.set('originalTotalQuantity', cart.totalQuantity);",
                               "    pm.variables.set('originalTotal', cart.total);",
                               "    pm.variables.set('originalDiscountedTotal', cart.discountedTotal);",
-                              "    pm.variables.set('userId', cart.userId);",
+                              "    pm.variables.set('cartOwnerUserId', cart.userId);",
                               "});"
                             ],
                             "type": "text/javascript"
