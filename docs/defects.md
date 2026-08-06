@@ -176,7 +176,16 @@ Format: Endpoint / Expected / Actual / Severity. IDs are stable — several are 
 **Role check:** same as DEF-018 — token owner (`addisonw`, id 30) is a plain `"user"`, target account (id 6, `oliviaw`) is `"moderator"`. A lower-privileged account deleted a higher-privileged one with no role check anywhere, ruling out legitimate admin access as an explanation. Verified live, not assumed.
 **Test strategy:** pinned under `KNOWN DEFECT DEF-021`, same CI-hygiene approach as DEF-005/DEF-018.
 
+#### DEF-022 — Add/Update User: unrecognized fields silently dropped, no validation or error
+
+**Endpoint:** POST /users/add, PUT /users/{id}
+**Expected:** 400 Bad Request naming the unrecognized field, or at minimum the field ignored with a warning surfaced in the response
+**Actual:** 201/200 OK — the field is silently dropped from the response with no indication it was received, accepted, or rejected
+**Severity:** Low
+**Note:** same permissive-write, no-validation pattern as DEF-001/002/003/016/019/020, this time for fields the schema doesn't recognize at all, rather than invalid values on fields it does. Confirmed live via the "Edge: extra unrecognized field in body" scenario in both `docs/add_user_happy.json` (H06) and `docs/update_user_happy.json` (H03) — `favoriteColor` sent, absent from the response, no error returned. Data-driven — pinned under `KNOWN DEFECT DEF-022` in "Add User - Happy Path (Data-Driven)" and "Update User - Happy Path (Data-Driven)".
+**Related:** distinct from DEF-019/DEF-020, which cover invalid or missing values on *recognized* fields — this is specifically about fields outside the schema entirely.
+
 ### Findings Under Review (not yet filed as defects)
 
 - **Filter Users — invalid key silently accepted:** `GET /users/filter?key=invalidKey&value=Brown` returns 200 with an empty result set instead of 400. Same permissive-input pattern as DEF-001/002/003. Pending a decision on whether to file.
-- **Search Users — empty query returns the full dataset:** `GET /users/search?q=` is not rejected and does not return zero results — it silently falls back to the full unfiltered user list (total 208), the same shape as `GET /users`. Widens the blast radius of DEF-006's plaintext-password exposure. Pending a decision on whether to file (would be DEF-022).
+- **Search Users — empty query returns the full dataset:** `GET /users/search?q=` is not rejected and does not return zero results — it silently falls back to the full unfiltered user list (total 208), the same shape as `GET /users`. Widens the blast radius of DEF-006's plaintext-password exposure. Pending a decision on whether to file (would be DEF-023).

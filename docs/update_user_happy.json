@@ -18,6 +18,8 @@
     "scenario": "Edge: extra unrecognized field in body",
     "userId": 2,
     "payload": { "lastName": "Owais", "favoriteColor": "teal" },
-    "expectedStatus": 200
+    "expectedStatus": 200,
+    "isKnownDefect": true,
+    "note": "Confirmed live - favoriteColor is silently dropped from the response with no validation error or warning. Filed as DEF-022 (no input validation on unrecognized fields), same permissive-write pattern as DEF-001/002/003/016/020."
   }
 ]
