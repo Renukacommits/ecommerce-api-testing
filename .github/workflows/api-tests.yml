@@ -185,6 +185,8 @@ jobs:
           newman run "postman/collections/Project 2 - E-commerce API- DummyJSON.postman_collection.json" \
             -e "postman/environments/DummyJSON.postman_environment.json" \
             --env-var "auth_password_0pef=$AUTH_PASSWORD" \
+            --folder "00 - Setup" \
+            --folder "Login user and get tokens" \
             --folder "Get current auth user" \
             --folder "Refresh auth session" \
             --folder "Add a cart - No Token" \
