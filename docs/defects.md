@@ -35,7 +35,9 @@ Format: Endpoint / Expected / Actual / Severity. IDs are stable — several are 
 
 #### DEF-005 — Broken Object Level Authorization (BOLA) on GET /auth/me, /auth/users/{id}, /search, /filter, /{id}/carts, and POST /auth/users/add, /auth/carts/add
 
-**Endpoint:** GET /auth/me, GET /auth/users/{id}, GET /auth/users/search, GET /auth/users/filter, GET /auth/users/{id}/carts, POST /auth/users/add, POST /auth/carts/add — 7/7 tested `/auth/*` routes matching this signature
+**STATUS UPDATE (07-08-2026): Partially resolved.** Re-tested across 2 consecutive CI runs. 5 of the 7 originally-vulnerable routes now correctly return 401 with no auth token: GET /auth/users/{id}, GET /auth/users/search, GET /auth/users/filter, GET /auth/users/{id}/carts, POST /auth/users/add. Their pinned tests were flipped from the insecure to the secure expectation per the test strategy below. **GET /auth/me and POST /auth/carts/add remain confirmed vulnerable as of the same date** — those two tests are unchanged and still pin the insecure (200/201) behaviour. Original finding (dated 15-07-2026) kept below unedited for the record.
+
+**Endpoint:** GET /auth/me, GET /auth/users/{id}, GET /auth/users/search, GET /auth/users/filter, GET /auth/users/{id}/carts, POST /auth/users/add, POST /auth/carts/add — 7/7 tested `/auth/*` routes matching this signature (5/7 now resolved, see status update above)
 **Expected:** 401 Unauthorized when no bearer token is supplied
 **Actual:** 200/201 OK with the full user object/list/cart contents (GET routes) or a real created record (POST routes) — with no token at all
 **Severity:** Critical
