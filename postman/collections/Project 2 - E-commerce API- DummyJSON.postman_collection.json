@@ -1240,11 +1240,11 @@
                       "});",
                       "",
                       "pm.test('accessToken is a valid JWT token', () => {",
-                      "    pm.expect(jsonData.accessToken).to.match(/^[\\w-]+\\.[\\w-]+\\.[\\w-]+\\$/);",
+                      "    pm.expect(jsonData.accessToken).to.match(/^[\\w-]+\\.[\\w-]+\\.[\\w-]+$/);",
                       "});",
                       "",
                       "pm.test('refreshToken is a valid JWT token', () => {",
-                      "    pm.expect(jsonData.refreshToken).to.match(/^[\\w-]+\\.[\\w-]+\\.[\\w-]+\\$/);",
+                      "    pm.expect(jsonData.refreshToken).to.match(/^[\\w-]+\\.[\\w-]+\\.[\\w-]+$/);",
                       "});"
                     ]
                   }
