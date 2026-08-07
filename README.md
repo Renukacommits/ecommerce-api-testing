@@ -5,6 +5,8 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![API Testing](https://img.shields.io/badge/API%20Testing-Automated-blue?style=for-the-badge)
 
+[![API Test Suite](https://github.com/Renukacommits/ecommerce-api-testing/actions/workflows/api-tests.yml/badge.svg)](https://github.com/Renukacommits/ecommerce-api-testing/actions/workflows/api-tests.yml)
+
 ## Project Overview
 
 This project tests the API of a simulated e-commerce platform, covering the full user journey — authentication, products, carts, and users. It exercises every endpoint in each module to confirm expected behaviour, and documents every place the API deviates from that expectation.
